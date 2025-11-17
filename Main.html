@@ -1,287 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>CoolJS — Jouw next-level website</title>
-    <meta name="description" content="Een moderne, interactieve single-file website klaar om te hosten.">
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ATIx Bedrijvendag</title>
     <style>
-        :root{
-            --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#7c3aed; --glass: rgba(255,255,255,0.04);
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: black; /* zwarte achtergrond als fallback */
+            overflow: hidden;  /* verberg scrollbalken */
         }
-        [data-theme="light"]{ --bg:#f6f9fc; --card:#ffffff; --muted:#556674; --accent:#6b21a8; --glass: rgba(10,12,16,0.04); }
-        *{box-sizing:border-box}
-        html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial; background:var(--bg); color:var(--muted); -webkit-font-smoothing:antialiased;}
 
-        /* animated gradient + subtle noise */
-        .bg-hero{position:fixed;inset:0;z-index:-2;overflow:hidden}
-        .gradient{position:absolute;inset:-20% -20% auto -20%;height:140%;background:linear-gradient(135deg, rgba(124,58,237,0.18), rgba(59,130,246,0.12) 25%, rgba(16,185,129,0.08) 60%);filter:blur(80px);animation:shift 12s linear infinite}
-        @keyframes shift{0%{transform:translateX(-10%)}50%{transform:translateX(10%)}100%{transform:translateX(-10%)}}
-
-        .container{max-width:1100px;margin:0 auto;padding:40px 24px}
-        header{display:flex;align-items:center;justify-content:space-between;gap:16px}
-        .brand{display:flex;align-items:center;gap:10px}
-        .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#06b6d4);box-shadow:0 6px 20px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
-        nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-weight:600}
-        .hero{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center;margin-top:36px}
-        .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:28px;border-radius:16px;box-shadow:0 8px 30px rgba(2,6,23,0.7);border:1px solid rgba(255,255,255,0.03)}
-        h1{color:var(--card);font-size:28px;margin:0 0 8px;color:var(--card)}
-        p.lead{color:var(--muted);margin:0 0 18px}
-        .cta{display:inline-flex;gap:12px;align-items:center}
-        .btn{background:linear-gradient(90deg,var(--accent),#06b6d4);color:white;padding:10px 14px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
-        .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-
-        /* cards - projects */
-        .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:18px}
-        .project{padding:18px;border-radius:12px;background:var(--card);color:white;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease}
-        .project:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(2,6,23,0.6)}
-        .meta{font-size:12px;color:var(--muted);margin-top:12px}
-
-        /* right panel */
-        .panel{position:relative}
-        .avatar{width:100%;height:260px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:center;font-size:72px;color:rgba(255,255,255,0.06)}
-        .stats{display:flex;gap:12px;margin-top:12px}
-        .stat{flex:1;padding:10px;border-radius:10px;background:var(--glass);text-align:center}
-        .stat strong{display:block;color:var(--card);font-size:18px}
-
-        section{margin-top:36px}
-        .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-
-        footer{padding:28px 0;color:var(--muted);text-align:center;margin-top:40px}
-
-        /* modal */
-        .modal-backdrop{position:fixed;inset:0;background:rgba(3,6,23,0.6);display:flex;align-items:center;justify-content:center;z-index:60}
-        .modal{width:min(760px,95%);background:var(--card);padding:20px;border-radius:14px}
-
-        /* responsive */
-        @media (max-width:900px){.hero{grid-template-columns:1fr;}.avatar{height:180px}}
-
-        /* subtle code block */
-        pre{background:#071025;color:#cfe8ff;padding:12px;border-radius:8px;overflow:auto}
-
-        /* small helpers */
-        .muted{color:var(--muted)}
-        .accent{color:var(--accent);font-weight:700}
-
-        /* typing cursor */
-        .typing{font-weight:800;color:var(--card)}
-        .cursor{display:inline-block;width:10px;height:22px;background:var(--accent);margin-left:6px;vertical-align:middle;animation:blink 1s steps(2) infinite}
-        @keyframes blink{50%{opacity:0}}
-
-        /* particle canvas overlay */
-        #particles{position:fixed;inset:0;z-index:-1}
-
+        video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            object-fit: cover; /* fullscreen vullend */
+        }
     </style>
 </head>
-<body data-theme="dark">
-<div class="bg-hero">
-    <div class="gradient"></div>
-</div>
-
-<canvas id="particles"></canvas>
-
-<div class="container">
-    <header>
-        <div class="brand">
-            <div class="logo">CJ</div>
-            <div>
-                <div style="font-weight:800;color:var(--card)">CoolJS</div>
-                <div style="font-size:12px;color:var(--muted)">Single-file, host & go</div>
-            </div>
-        </div>
-        <div>
-            <nav>
-                <a href="#features">Features</a>
-                <a href="#projects">Projecten</a>
-                <a href="#contact">Contact</a>
-                <button id="themeToggle" class="btn ghost" title="Toggle theme">Theme</button>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <div class="hero">
-            <div class="card">
-                <h1>Maak indruk met een <span class="accent">snelle</span> en <span class="accent">moderne</span> website</h1>
-                <p class="lead">Klaar om te hosten — responsive, interactieve animaties, modale projectweergave en thema-omschakeling. Kopieer & plak naar <code>index.html</code> en zet op je server.</p>
-
-                <div class="cta">
-                    <button class="btn" id="openDemo">Bekijk demo</button>
-                    <button class="btn ghost" id="downloadBtn">Download (HTML)</button>
-                </div>
-
-                <section id="features">
-                    <h3 style="margin-top:22px;color:var(--card)">Wat zit erin?</h3>
-                    <div class="grid-3" style="margin-top:10px">
-                        <div class="card" style="background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent)">
-                            <strong style="color:var(--card)">Theme & voorkeur</strong>
-                            <p class="muted">Licht/donker met opslag in localStorage.</p>
-                        </div>
-                        <div class="card">
-                            <strong style="color:var(--card)">Project modal</strong>
-                            <p class="muted">Klik op een project om details en codevoorbeelden te zien.</p>
-                        </div>
-                        <div class="card">
-                            <strong style="color:var(--card)">Canvas deeltjes</strong>
-                            <p class="muted">Lichte, performante particle-achtergrond met requestAnimationFrame.</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <aside class="panel">
-                <div class="avatar card">🚀</div>
-                <div class="stats">
-                    <div class="stat"><small class="muted">Bezoekers</small><strong id="visitors">1.2k</strong></div>
-                    <div class="stat"><small class="muted">Projects</small><strong>6</strong></div>
-                </div>
-
-                <div style="margin-top:14px" class="card">
-                    <h4 style="margin:0 0 8px;color:var(--card)">Snelle instellingen</h4>
-                    <label style="display:block;font-size:13px;color:var(--muted)">Naam site
-                        <input id="siteName" placeholder="Jouw site" style="width:100%;margin-top:8px;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--card)" />
-                    </label>
-                    <button class="btn" id="applyName" style="margin-top:10px">Toepassen</button>
-                </div>
-            </aside>
-        </div>
-
-        <section id="projects" class="card">
-            <h3 style="color:var(--card);margin-top:0">Projecten</h3>
-            <div class="projects" id="projectsList">
-                <!-- JS vult dit -->
-            </div>
-        </section>
-
-        <section id="contact" class="card">
-            <h3 style="color:var(--card);margin-top:0">Contact</h3>
-            <p class="muted">Gebruik het formulier hieronder of klik om een e-mail te openen.</p>
-            <form id="contactForm">
-                <label style="display:block;margin-bottom:8px">Naam
-                    <input name="name" required style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--card)" />
-                </label>
-                <label style="display:block;margin-bottom:8px">Bericht
-                    <textarea name="message" rows="4" required style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--card)"></textarea>
-                </label>
-                <div style="display:flex;gap:10px;align-items:center">
-                    <button class="btn" type="submit">Verstuur</button>
-                    <button type="button" class="btn ghost" id="mailtoBtn">Open e-mail</button>
-                </div>
-            </form>
-        </section>
-
-        <footer class="card">
-            <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap">
-                <div>Gemaakt met ❤️ — kopieer deze file naar <code>index.html</code> en host hem op jouw server.</div>
-                <div class="muted">Versie 1.0 • CoolJS</div>
-            </div>
-        </footer>
-    </main>
-</div>
-
-<!-- modal template -->
-<template id="modalT">
-    <div class="modal-backdrop">
-        <div class="modal">
-            <button id="closeModal" style="float:right;border:none;background:none;color:var(--muted);font-weight:700;cursor:pointer">✕</button>
-            <div id="modalContent"></div>
-        </div>
-    </div>
-</template>
-
-<script>
-    // ------------------ Basic data & DOM ------------------
-    const projects = [
-        {id:1,title:'Realtime Dashboard',desc:'Een realtime dashboard met fake data en interactieve charts.',tags:['dashboard','realtime'],code:`// voorbeeld: fetch('/api/data')\nconsole.log('simulate live data')`},
-        {id:2,title:'Portfolio Grid',desc:'Responsieve projectgrid met modale detailweergave.',tags:['ui','grid'],code:`<div class=\"project-sample\">HTML voorbeeld</div>`},
-        {id:3,title:'Animaties',desc:'Canvas & CSS animaties die niet vertragen bij scrollen.',tags:['animation'],code:`requestAnimationFrame(loop)`},
-        {id:4,title:'Form Enhancer',desc:'Progressieve formulier-UX en validation.',tags:['forms'],code:`if(!name) throw 'name required'`},
-        {id:5,title:'Static Blog',desc:'Snel statisch blog met markdown rendering aan de client.',tags:['blog'],code:`marked.parse('#Hello')`},
-        {id:6,title:'Micro CMS',desc:'Kleine admin UI voor het beheren van content lokaal.',tags:['admin'],code:`localStorage.setItem('pages', JSON.stringify([]))`}
-    ];
-
-    const projectsList = document.getElementById('projectsList');
-
-    function renderProjects(){
-        projectsList.innerHTML = '';
-        projects.forEach(p=>{
-            const el = document.createElement('div'); el.className='project'; el.tabIndex=0;
-            el.innerHTML = `<div style=\"font-weight:800;color:var(--card)\">${p.title}</div><div class=\"meta\">${p.desc}</div><div class=\"meta\">${p.tags.map(t=>`<span class=\\"muted\\">#${t}</span>`).join(' ')}</div>`;
-            el.addEventListener('click',()=>openModal(p));
-            el.addEventListener('keydown',e=>{ if(e.key==='Enter') openModal(p); });
-            projectsList.appendChild(el);
-        });
-    }
-    renderProjects();
-
-    // ------------------ Modal ------------------
-    const modalT = document.getElementById('modalT');
-    function openModal(project){
-        const clone = modalT.content.cloneNode(true);
-        const backdrop = clone.querySelector('.modal-backdrop');
-        const content = clone.getElementById('modalContent');
-        content.innerHTML = `<h2 style=\"margin-top:0;color:var(--card)\">${project.title}</h2><p class=\"muted\">${project.desc}</p><pre>${escapeHtml(project.code)}</pre><div style=\"margin-top:10px;text-align:right\"><button class=\"btn\" id=\"openCode\">Kopieer code</button></div>`;
-        document.body.appendChild(backdrop);
-        backdrop.addEventListener('click', (e)=>{ if(e.target===backdrop) closeModal(backdrop); });
-        backdrop.querySelector('#closeModal').addEventListener('click', ()=> closeModal(backdrop));
-        backdrop.querySelector('#openCode').addEventListener('click', ()=>{ navigator.clipboard.writeText(project.code).then(()=>alert('Code gekopieerd!')) });
-    }
-    function closeModal(backdrop){ backdrop.remove(); }
-
-    function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-    // ------------------ Theme toggle ------------------
-    const themeToggle = document.getElementById('themeToggle');
-    const root = document.body;
-    function setTheme(t){ root.setAttribute('data-theme', t); localStorage.setItem('cj_theme', t);}
-    const stored = localStorage.getItem('cj_theme') || 'dark'; setTheme(stored);
-    themeToggle.addEventListener('click', ()=> setTheme(root.getAttribute('data-theme')==='dark' ? 'light' : 'dark'));
-
-    // ------------------ Simple visitors counter (fake) ------------------
-    const visitorsEl = document.getElementById('visitors');
-    let visitors = parseFloat(visitorsEl.textContent.replace('k','')) || 1.2;
-    setInterval(()=>{ visitors += (Math.random()*0.05); visitorsEl.textContent = (Math.round(visitors*10)/10)+'k'; }, 3500);
-
-    // ------------------ Site name apply ------------------
-    document.getElementById('applyName').addEventListener('click', ()=>{
-        const v = document.getElementById('siteName').value.trim(); if(v) document.title = v + ' — CoolJS';
-    });
-
-    // ------------------ contact form ------------------
-    document.getElementById('contactForm').addEventListener('submit', (e)=>{ e.preventDefault(); const f=new FormData(e.target); alert('Bedankt, '+f.get('name')+' — formulier lokaal verwerkt.'); e.target.reset(); });
-    document.getElementById('mailtoBtn').addEventListener('click', ()=>{ window.location.href = 'mailto:you@example.com?subject=Contact via CoolJS'; });
-
-    // ------------------ download HTML (client-side) ------------------
-    document.getElementById('downloadBtn').addEventListener('click', ()=>{
-        const html = '<!doctype html>\n' + document.documentElement.outerHTML;
-        const blob = new Blob([html], {type:'text/html'});
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a'); a.href=url; a.download='index.html'; a.click(); URL.revokeObjectURL(url);
-    });
-
-    // ------------------ demo open (scroll) ------------------
-    document.getElementById('openDemo').addEventListener('click', ()=>{ document.getElementById('projects').scrollIntoView({behavior:'smooth'}); });
-
-    // ------------------ simple typing effect ------------------
-    const typingEl = document.createElement('div'); typingEl.className='typing'; typingEl.innerHTML = 'Snel. Modern. Klaar.';
-    const heroTitle = document.querySelector('.card h1'); heroTitle.appendChild(typingEl); const cur = document.createElement('span'); cur.className='cursor'; typingEl.appendChild(cur);
-
-    // ------------------ lightweight particle system ------------------
-    const canvas = document.getElementById('particles'); const ctx = canvas.getContext('2d'); let W, H, particles=[];
-    function resize(){ W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
-    addEventListener('resize', resize); resize();
-    function makeParticles(){ particles = []; for(let i=0;i<60;i++){ particles.push({x:Math.random()*W,y:Math.random()*H, vx:(Math.random()-0.5)*0.3, vy:(Math.random()-0.5)*0.3, r:1+Math.random()*2}) } }
-    makeParticles();
-    function loop(){ ctx.clearRect(0,0,W,H); particles.forEach(p=>{ p.x += p.vx; p.y += p.vy; if(p.x<0) p.x=W; if(p.x>W) p.x=0; if(p.y<0) p.y=H; if(p.y>H) p.y=0; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(255,255,255,0.04)'; ctx.fill(); }); requestAnimationFrame(loop); }
-    requestAnimationFrame(loop);
-
-    // ------------------ accessibility: keyboard shortcut to open projects (P) ------------------
-    addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='p'){ document.getElementById('projects').scrollIntoView({behavior:'smooth'}); } });
-
-    // ------------------ small helper for escaping (used above) ------------------
-
-    // ------------------ end of script ------------------
-</script>
+<body>
+<video autoplay loop muted playsinline>
+    <source src="assets/ATIx_Bedrijvendag.mp4" type="video/mp4" />
+</video>
 </body>
 </html>
